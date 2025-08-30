@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Crossroads - DFPA</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;700&display=swap");
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #f5f5f5; overflow-x: hidden; }
+        .title-font { font-family: 'Playfair Display', serif; }
+        .glow-effect:hover { box-shadow: 0 0 20px rgba(74, 222, 128, 0.5); }
+    </style>
+</head>
+<body>
+    <section id="services" class="min-h-screen flex items-center py-24">
+        <div class="container mx-auto px-6">
+            <h2 class="text-5xl font-medium text-center title-font">The Path Splits</h2>
+            <p class="text-gray-400 text-lg text-center max-w-3xl mx-auto mt-6 mb-20">
+                Will you commission an artifact forged in the depths of our forest, or will you learn to master the forest yourself? The choice defines your journey.
+            </p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <div class="service-card border border-gray-800 rounded-lg p-8 h-full flex flex-col backdrop-blur-sm bg-black/20">
+                    <h3 class="text-3xl font-medium title-font mb-4">Forge a Digital Legacy</h3>
+                    <p class="text-gray-400 mb-6 flex-grow">Commission a bespoke digital experience. We are not just web developers; we are narrative weavers, digital sculptors, and architects of interaction. We build websites that are not merely visited, but felt and remembered.</p>
+                    <ul class="text-gray-300 space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-leaf text-green-400 w-6 text-center"></i> Narrative-Driven Design</li>
+                        <li class="flex items-center"><i class="fas fa-cube text-green-400 w-6 text-center"></i> Advanced Animation & 3D</li>
+                        <li class="flex items-center"><i class="fas fa-bolt text-green-400 w-6 text-center"></i> AI-Powered Interactivity</li>
+                    </ul>
+                    <a href="#contact" class="mt-auto inline-block text-center px-8 py-3 bg-white text-black font-medium rounded-full hover:bg-gray-200 transition-all glow-effect">
+                        Commission an Experience
+                    </a>
+                </div>
+                <div class="service-card border border-gray-800 rounded-lg p-8 h-full flex flex-col backdrop-blur-sm bg-black/20">
+                    <h3 class="text-3xl font-medium title-font mb-4">Master the Unseen Language</h3>
+                    <p class="text-gray-400 mb-6 flex-grow">Become an architect of intelligence. Our subscription grants you access to the heart of the forest—The Prompt Codex. Learn the hidden arts of prompt engineering through live training and a library of master-crafted prompt chains.</p>
+                    <ul class="text-gray-300 space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-book text-green-400 w-6 text-center"></i> The Prompt Codex Library</li>
+                        <li class="flex items-center"><i class="fas fa-users text-green-400 w-6 text-center"></i> Live Training Sessions</li>
+                        <li class="flex items-center"><i class="fas fa-cogs text-green-400 w-6 text-center"></i> Advanced Prompt Chains</li>
+                    </ul>
+                    <a href="#subscribe" class="mt-auto inline-block text-center px-8 py-3 bg-green-500 text-black font-medium rounded-full hover:bg-green-400 transition-all glow-effect">
+                        Begin Your Apprenticeship
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        const services = document.querySelectorAll('.service-card');
+        gsap.set(services, { opacity: 0, y: 50 });
+        gsap.to(services, {
+            opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power3.out",
+            scrollTrigger: { trigger: ".service-card", start: "top 80%", toggleActions: "play reverse play reverse" }
+        });
+    </script>
+</body>
+</html>
