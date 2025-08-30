@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Academy - DFPA</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;700&display=swap");
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: #000; color: #f5f5f5; overflow-x: hidden; }
+        .title-font { font-family: 'Playfair Display', serif; }
+        .glow-effect:hover { box-shadow: 0 0 20px rgba(74, 222, 128, 0.5); }
+        .card-container { position: relative; border-radius: 0.5rem; padding: 1px; overflow: hidden; background: black; }
+        .card-container::before { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient( transparent, rgba(34,197,94,0), rgba(34,197,94,0.3), rgba(34,197,94,0.5), rgba(34,197,94,0.3), rgba(34,197,94,0), transparent ); animation: rotate 8s linear infinite; z-index: 1; }
+        @keyframes rotate { 100% { transform: rotate(1turn); } }
+        .card-inner { background: #0a0a0a; position: relative; z-index: 2; border-radius: 0.5rem; padding: 2rem; }
+        .team-member-card { position: relative; transition: all 0.4s ease; border: 1px solid rgba(75, 85, 99, 0.3); background-color: rgba(17, 24, 39, 0.3); }
+        .team-member-card:hover { transform: translateY(-12px); box-shadow: 0 15px 30px -10px rgba(34, 197, 94, 0.15); border-color: rgba(34, 197, 94, 0.3); }
+        .team-member-card .overlay { position: absolute; bottom: 0; left: 0; right: 0; height: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%); overflow: hidden; transition: height 0.4s ease; }
+        .team-member-card:hover .overlay { height: 50%; }
+        .team-member-card .social-links { position: absolute; bottom: 20px; left: 0; right: 0; opacity: 0; transform: translateY(20px); transition: all 0.4s ease; }
+        .team-member-card:hover .social-links { opacity: 1; transform: translateY(0); }
+        .social-links a { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.1); color: white; margin: 0 4px; transition: all 0.3s ease; }
+        .social-links a:hover { background: rgba(34, 197, 94, 0.6); transform: translateY(-3px); }
+        .team-member-card .role-tag { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 500; margin-top: 6px; background: rgba(34, 197, 94, 0.15); color: rgba(34, 197, 94, 0.9); }
+        .img-gradient-mask { position: relative; }
+        .img-gradient-mask::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(15,15,15,0.8) 100%); }
+    </style>
+</head>
+<body>
+    <section id="about-academy" class="container mx-auto px-6 pt-16 pb-24 md:pt-28 md:pb-32">
+        <div class="flex flex-col items-center justify-center mb-16">
+            <div class="max-w-4xl">
+                <h1 class="text-5xl md:text-6xl font-medium tracking-tight leading-[1.1] mb-8 text-center title-font">About the <span class="text-green-400">Academy</span></h1>
+                <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 text-center">We are the architects of a new era, forging minds to shape reality with the precision of language and the power of intention.</p>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mb-24">
+            <div class="card-container"><div class="card-inner"><h2 class="text-2xl font-medium mb-4 title-font">The Origin</h2><p class="text-gray-400 mb-4">Born from the chaos of a million whispers, the Academy was founded on a singular principle: that thought becomes substance when channeled through the right words.</p><p class="text-gray-400">Our collective of visionaries came together to create a sanctuary where the ancient art of command is taught and perfected, building worlds from whispered commands.</p></div></div>
+            <div class="card-container"><div class="card-inner"><h2 class="text-2xl font-medium mb-4 title-font">Our Purpose</h2><p class="text-gray-400 mb-4">The uninitiated stumble in the digital wilderness, lost to their own intentions. We provide the map, the compass, and the language to find the one true path.</p><p class="text-gray-400">The Dark Forest Prompt Academy empowers you to move beyond basic inquiry and become a master architect of intelligence.</p></div></div>
+        </div>
+        <div class="mb-24">
+            <h2 class="text-3xl font-medium text-center mb-12 title-font">Our Principles</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card-container principle-card"><div class="card-inner"><h3 class="text-xl font-medium mb-3 title-font text-green-400">Intent</h3><p class="text-gray-400">Beyond the keyword, there is intent. We teach the art of crafting prompts that are not merely understood, but felt by the machine.</p></div></div>
+                <div class="card-container principle-card"><div class="card-inner"><h3 class="text-xl font-medium mb-3 title-font text-green-400">Architecture</h3><p class="text-gray-400">A great prompt is not a single command, but a structured dialogue. Learn to build conversational frameworks that guide AI to complex solutions.</p></div></div>
+                <div class="card-container principle-card"><div class="card-inner"><h3 class="text-xl font-medium mb-3 title-font text-green-400">Precision</h3><p class="text-gray-400">Language is a scalpel. Master the nuance of syntax, token weighting, and context to sculpt outputs with surgical precision.</p></div></div>
+            </div>
+        </div>
+        <div class="mb-24">
+            <h2 class="text-3xl font-medium text-center mb-4 title-font">The Architects</h2>
+            <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">The talented individuals passionate about building the future of language and intelligence.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="team-member-card rounded-lg overflow-hidden"><div class="img-gradient-mask"><img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Shane" class="w-full h-72 object-cover"></div><div class="p-5"><h3 class="text-xl font-medium">Shane</h3><div class="role-tag">Chief Architect</div><p class="text-gray-400 text-sm mt-3">Visionary leader guiding the Academy's path and philosophy.</p></div><div class="overlay"><div class="social-links text-center"><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-github"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div></div>
+                <div class="team-member-card rounded-lg overflow-hidden"><div class="img-gradient-mask"><img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Elara" class="w-full h-72 object-cover"></div><div class="p-5"><h3 class="text-xl font-medium">Elara</h3><div class="role-tag">Lead Narrative Designer</div><p class="text-gray-400 text-sm mt-3">Weaves compelling stories into interactive digital canvases.</p></div><div class="overlay"><div class="social-links text-center"><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-github"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div></div>
+                <div class="team-member-card rounded-lg overflow-hidden"><div class="img-gradient-mask"><img src="https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Kael" class="w-full h-72 object-cover"></div><div class="p-5"><h3 class="text-xl font-medium">Kael</h3><div class="role-tag">Generative Art Director</div><p class="text-gray-400 text-sm mt-3">Specializes in visual world-building with diffusion models.</p></div><div class="overlay"><div class="social-links text-center"><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-github"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div></div>
+                <div class="team-member-card rounded-lg overflow-hidden"><div class="img-gradient-mask"><img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Ren" class="w-full h-72 object-cover"></div><div class="p-5"><h3 class="text-xl font-medium">Ren</h3><div class="role-tag">Systems Architect</div><p class="text-gray-400 text-sm mt-3">Builds the robust backend systems that power our creations.</p></div><div class="overlay"><div class="social-links text-center"><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-github"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div></div>
+            </div>
+        </div>
+        <div class="card-container max-w-3xl mx-auto">
+            <div class="card-inner text-center">
+                <h2 class="text-2xl font-medium mb-6 title-font">Ready to walk the path?</h2>
+                <p class="text-gray-400 mb-8 max-w-lg mx-auto">The journey begins with a single step. Claim your place among the architects of a new reality.</p>
+                <a href="services.html" class="inline-block px-8 py-3 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-all glow-effect">
+                    Continue The Journey
+                </a>
+            </div>
+        </div>
+    </section>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        const principles = document.querySelectorAll('.principle-card');
+        gsap.set(principles, { opacity: 0, y: 50 });
+        gsap.to(principles, { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power3.out", scrollTrigger: { trigger: ".principle-card", start: "top 85%", toggleActions: "play reverse play reverse" } });
+        const architects = document.querySelectorAll('.team-member-card');
+        gsap.set(architects, { opacity: 0, scale: 0.9 });
+        gsap.to(architects, { opacity: 1, scale: 1, duration: 1, stagger: 0.1, ease: "power3.out", scrollTrigger: { trigger: ".team-member-card", start: "top 85%", toggleActions: "play reverse play reverse" } });
+    </script>
+</body>
+</html>
