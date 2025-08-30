@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Forest Prompt Academy - The Journey</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;700&display=swap");
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f0f;
+            color: #f5f5f5;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5%;
+        }
+
+        .section-inner {
+            max-width: 1200px;
+            pointer-events: auto;
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 8vw, 8rem);
+            font-weight: 700;
+            line-height: 0.9;
+            opacity: 0;
+            transform: translateY(100px);
+            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .description {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(60px);
+            color: rgba(245, 245, 245, 0.8);
+            font-weight: 300;
+        }
+
+        .quote-section {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5%;
+        }
+
+        .quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-style: italic;
+            text-align: center;
+            max-width: 800px;
+            opacity: 0;
+            transform: translateY(30px) scale(0.8);
+            color: rgba(245, 245, 245, 0.6);
+            line-height: 1.4;
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: clamp(3rem, 10vw, 6rem);
+            }
+            .description {
+                font-size: 1.125rem;
+            }
+            .quote {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="m-0 p-0 box-border">
+    <canvas id="canvas"></canvas>
+    <div class="content">
+        <section class="section">
+            <div class="section-inner">
+                <h1 class="title">Opening<br>Sequence</h1>
+                <p class="description">Reality bends to the will of precise language. Every prompt is a key that unlocks hidden dimensions of possibility.</p>
+            </div>
+        </section>
+        
+        <div class="quote-section">
+            <p class="quote">"In the vast digital forest, most wander lost among surface thoughts. But some learn to speak the ancient language of intention."</p>
+        </div>
+        
+        <section class="section">
+            <div class="section-inner">
+                <h1 class="title">The<br>Academy<br>Emerges</h1>
+                <p class="description">Welcome to the shadows where masters forge reality with words. Here, prompts become spells, and language becomes power.</p>
+            </div>
+        </section>
+        
+        <div class="quote-section">
+            <p class="quote">"The Dark Forest Prompt Academy exists in the liminal space between question and answer, where skilled architects build worlds from whispered commands."</p>
+        </div>
+        
+        <section class="section">
+            <div class="section-inner">
+                <h1 class="title">The<br>Transformation</h1>
+                <p class="description">Every great prompt engineer began as a wanderer in the wilderness of possibility. We transform seekers into reality architects.</p>
+            </div>
+        </section>
+        
+        <div class="quote-section">
+            <p class="quote">"Deep in our archives lies the Codex - a collection of prompt chains that have bent silicon minds to human will. These are the keys to the kingdom."</p>
+        </div>
+        
+        <section class="section">
+            <div class="section-inner">
+                <h1 class="title">The<br>Mastery</h1>
+                <p class="description">Every great prompt engineer began as a wanderer in the wilderness of possibility. We transform seekers into reality architects.</p>
+            </div>
+        </section>
+        
+        <div class="quote-section">
+            <p class="quote">"The deepest shadow waves hold the brightest secrets. What pulses in darkness illuminates the soul."</p>
+        </div>
+
+        <section class="section">
+            <div class="section-inner text-center !w-full">
+                <h1 class="title !text-center">The Invitation</h1>
+                <p class="description !max-w-full">Step from the shadows of uncertainty into the light of mastery. Your transformation awaits in the depths of the Dark Forest.</p>
+                <button class="mt-8 bg-transparent text-white border-2 border-white/20 hover:border-white/50 px-8 py-4 rounded-full transition-all duration-300 font-medium tracking-wide pointer-events-auto hover:bg-white/10 opacity-0 scale-90">
+                    Enter the Academy
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <script type="module">
+        import * as THREE from "https://esm.sh/three@0.160.0";
+        
+        gsap.registerPlugin(ScrollTrigger);
+        
+        const canvas = document.getElementById("canvas");
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000, 0);
+        
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+        const scene = new THREE.Scene();
+        
+        const fragmentShader = `
+            precision highp float;
+            uniform vec2 iResolution;
+            uniform float iTime;
+            uniform vec4 iMouse;
+            uniform float iScrollOffset;
+            uniform float iScrollProgress;
+            
+            #define S(a, b, t) smoothstep(a, b, t)
+            #define sat(x) clamp(x, 0.0, 1.0)
+            
+            vec2 hash2(vec2 p) {
+                p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+                return fract(sin(p) * 43758.5453);
+            }
+            
+            float noise(vec2 p) {
+                vec2 i = floor(p);
+                vec2 f = fract(p);
+                vec2 u = f * f * (3.0 - 2.0 * f);
+                return mix(mix(hash2(i).x, hash2(i + vec2(1.0, 0.0)).x, u.x),
+                           mix(hash2(i + vec2(0.0, 1.0)).x, hash2(i + vec2(1.0, 1.0)).x, u.x), u.y);
+            }
+            
+            float fbm(vec2 p) {
+                float v = 0.0;
+                float a = 0.5;
+                vec2 shift = vec2(100);
+                for (int i = 0; i < 5; ++i) {
+                    v += a * noise(p);
+                    p = p * 2.0 + shift;
+                    a *= 0.5;
+                }
+                return v;
+            }
+
+            float tree(vec2 uv, float x, float time, float density, float width, float chaos) {
+                float wave = fbm(vec2(x * 0.5, uv.y * 2.0 + time)) * chaos;
+                float dist = abs(uv.x - (x + wave));
+                float treeShape = S(width, 0.0, dist);
+                return treeShape * density;
+            }
+            
+            float bloom(float dist, float radius, float intensity) {
+                return exp(-pow(dist / radius, 2.0)) * intensity;
+            }
+            
+            void main() {
+                vec2 uv = (gl_FragCoord.xy - 0.5 * iResolution.xy) / iResolution.y;
+                float t = iTime * 0.5;
+                
+                vec3 col = vec3(0.0);
+                
+                float scroll_progress = iScrollProgress;
+                float bloom_progress = S(0.8, 1.0, scroll_progress);
+                float chaos_progress = 1.0 - S(0.0, 0.7, scroll_progress);
+                
+                // Light particles (embers)
+                for(float i = 0.0; i < 30.0; i++) {
+                    vec2 p = hash2(vec2(i, i * 2.0));
+                    p.x = (p.x * 2.0 - 1.0) * 5.0;
+                    p.y = (p.y * 2.0 - 1.0) * 5.0;
+                    
+                    p.x += sin(t * 0.5 + i) * 0.5;
+                    p.y += t * 0.2 * (1.0 - scroll_progress) + sin(t * 0.3 + i * 0.8) * 0.3;
+                    
+                    float dist_to_particle = distance(uv, p);
+                    float light = bloom(dist_to_particle, 0.1, 1.0);
+                    col += light * mix(vec3(0.5, 0.2, 0.05), vec3(0.7, 0.5, 0.3), light) * (1.0 - scroll_progress);
+                }
+                
+                // Forest trees (the struggle)
+                for (float i = 0.0; i < 15.0; i++) {
+                    float x_offset = i * 0.5 - 3.5;
+                    float y_offset = -iScrollOffset * mix(0.1, 0.6, i / 15.0);
+                    
+                    vec2 tree_uv = uv;
+                    tree_uv.y += y_offset;
+                    
+                    float tree_chaos = mix(0.2, 0.05, scroll_progress);
+                    float tree_density = mix(1.0, 0.2, scroll_progress);
+                    float tree_width = mix(0.1, 0.05, scroll_progress);
+
+                    float trunk = tree(tree_uv, x_offset, t, tree_density, tree_width, tree_chaos);
+                    vec3 trunk_color = mix(vec3(0.08, 0.1, 0.12), vec3(0.05, 0.06, 0.07), scroll_progress);
+                    col += trunk * trunk_color;
+                }
+                
+                // Final light source (the decision)
+                vec2 light_pos = vec2(0.0, -1.5);
+                float dist_to_light = distance(uv, light_pos);
+                float final_light = bloom(dist_to_light, 0.5 * bloom_progress, 1.0);
+                vec3 light_color = mix(vec3(0.0), vec3(0.7, 0.9, 1.0), bloom_progress) * final_light * 2.0;
+                
+                // Blend final light with main color
+                col = mix(col, light_color, bloom_progress);
+
+                // Add background noise and overall color tone
+                float bg_noise = fbm(uv * 5.0 + t * 0.1) * 0.2;
+                col += bg_noise;
+                
+                gl_FragColor = vec4(col, 1.0);
+            }
+        `;
+        
+        const vertexShader = `
+            void main() {
+                gl_Position = vec4(position, 1.0);
+            }
+        `;
+        
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                iResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+                iTime: { value: 0 },
+                iMouse: { value: new THREE.Vector4(0, 0, 0, 0) },
+                iScrollOffset: { value: 0 },
+                iScrollProgress: { value: 0 }
+            },
+            fragmentShader,
+            vertexShader,
+            transparent: true
+        });
+        
+        const geometry = new THREE.PlaneGeometry(2, 2);
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+        
+        // Scroll handling
+        let scrollOffset = 0;
+        const totalScrollHeight = () => document.body.scrollHeight - window.innerHeight;
+        
+        // GSAP animations
+        const sections = document.querySelectorAll(".section");
+        const quotes = document.querySelectorAll(".quote");
+        const button = document.querySelector('button');
+        
+        gsap.set(button, { opacity: 0, scale: 0.9 });
+
+        sections.forEach((section) => {
+            const title = section.querySelector(".title");
+            const description = section.querySelector(".description");
+            
+            if (title && description) {
+                 gsap.set([title, description], { opacity: 0, y: 100, rotateX: 20 });
+            }
+
+            ScrollTrigger.create({
+                trigger: section,
+                start: "top center",
+                end: "bottom center",
+                scrub: 1,
+                onUpdate: (self) => {
+                    if (title) {
+                        gsap.to(title, { yPercent: -50 * self.progress, ease: "none" });
+                    }
+                    if (description) {
+                        gsap.to(description, { yPercent: 50 * self.progress, ease: "none" });
+                    }
+                }
+            });
+
+            if (title && description) {
+                gsap.to([title, description], {
+                    opacity: 1,
+                    y: 0,
+                    rotateX: 0,
+                    duration: 1.5,
+                    stagger: 0.1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 80%",
+                        toggleActions: "play reverse play reverse"
+                    }
+                });
+            }
+        });
+        
+        quotes.forEach((quote) => {
+            gsap.set(quote, { opacity: 0, y: 30, scale: 0.9 });
+
+            gsap.to(quote, {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 1.5,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: quote,
+                    start: "top 80%",
+                    toggleActions: "play reverse play reverse"
+                }
+            });
+        });
+
+        // Call to action button animation
+        gsap.to(button, {
+            opacity: 1,
+            scale: 1,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: button,
+                start: "top 90%",
+                toggleActions: "play reverse play reverse"
+            }
+        });
+        
+        // Scroll updates
+        ScrollTrigger.create({
+            trigger: "body",
+            start: "top top",
+            end: "bottom bottom",
+            onUpdate: () => {
+                const scrollProgress = window.scrollY / totalScrollHeight();
+                material.uniforms.iScrollProgress.value = scrollProgress;
+            }
+        });
+        
+        // Mouse events
+        window.addEventListener("mousemove", (e) => {
+            material.uniforms.iMouse.value.x = e.clientX;
+            material.uniforms.iMouse.value.y = e.clientY;
+        });
+        
+        window.addEventListener("mousedown", () => material.uniforms.iMouse.value.z = 1);
+        window.addEventListener("mouseup", () => material.uniforms.iMouse.value.z = 0);
+        
+        // Resize handling
+        window.addEventListener("resize", () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            material.uniforms.iResolution.value.set(window.innerWidth, window.innerHeight);
+        });
+        
+        // Animation loop
+        function animate(time) {
+            material.uniforms.iTime.value = time * 0.001;
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+        
+        requestAnimationFrame(animate);
+    </script>
+</body>
+</html>
